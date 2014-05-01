@@ -1,0 +1,46 @@
+$colorList: red orange yellow green blue indigo violet;
+
+$arc: 750px;
+
+$borderWidth: 3px;
+
+$leftPosition: 5px;
+
+.rainbowContainer{
+    width: 960px;
+    border:1px solid black;
+    margin:10px auto;
+    position:relative;
+}
+
+.arc{
+    border: $borderWidth solid white;
+    position:absolute;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+@each $color in $colorList {
+    ##{$color}{
+        width: $arc;
+        height: $arc;
+        border-top-color:$color;
+        @include border-radius($arc);
+        left:$leftPosition;
+    }
+}
+
+
+
+@for $i from 0 to length($colorList) {
+    .arc-#{$i} {
+        top:($leftPosition * $i);
+        z-index:($i+1);
+    }
+}
